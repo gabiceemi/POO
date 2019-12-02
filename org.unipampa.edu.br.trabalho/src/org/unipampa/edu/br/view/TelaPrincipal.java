@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import org.unipampa.edu.br.bean.Deslocamento;
-import org.unipampa.edu.br.bean.Situacao;
-import org.unipampa.edu.br.bean.Unidade;
-import org.unipampa.edu.br.controller.LerExcel;
-import org.unipampa.edu.br.model.dao.DeslocamentoDAO;
-import org.unipampa.edu.br.model.dao.SituacaoDAO;
-import org.unipampa.edu.br.model.dao.UnidadeDAO;
+import org.unipampa.edu.br.model.Situacao;
+import org.unipampa.edu.br.model.Unidade;
+import org.unipampa.edu.br.controller.ControllerExcell;
+import org.unipampa.edu.br.dao.SituacaoDAO;
+import org.unipampa.edu.br.dao.UnidadeDAO;
+import org.unipampa.edu.br.dao.ViagemDAO;
+import org.unipampa.edu.br.model.Viagem;
 
 /**
  *
@@ -27,7 +27,7 @@ import org.unipampa.edu.br.model.dao.UnidadeDAO;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private String EXCEL_FILE_LOCATION;
-    private Set<Deslocamento> deslocamentos;
+    private Set<Viagem> viagens;
 
     /**
      * Creates new form TelaPrincipal
@@ -161,14 +161,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        LerExcel ler = new LerExcel();
+        ControllerExcell ler = new ControllerExcell();
         ler.lerExcel(EXCEL_FILE_LOCATION);
-        deslocamentos = ler.getDeslocamentos();
+        viagens = ler.getViagem();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        for (Deslocamento des : deslocamentos) {
-            modelo.addRow(new Object[]{des.getUnidade().getUnidade(), des.getTipo(), des.getData(),
-                des.getPlacaVeiculo(), des.getQtdPassageiros(), des.getCustoMotorista(),
-                des.getCustoVeiculo(), des.getSituacao().getSituacao()});
+        for (Viagem vs: viagens) {
+            modelo.addRow(new Object[]{vs.getUnidade().getValor(), vs.getTipoDeslocamento(), vs.getDataSolicitacao(),
+                vs.getVeiculo().getPlaca(), vs.getQtdPassageiros(), vs.getVlCustoEstMotorista(),
+                vs.getVlCustoEstVeiculo(), vs.getSituacao().getValor()});
         }
         jTable1.repaint();
         jTable1.setModel(modelo);
@@ -177,17 +177,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         SituacaoDAO daoS = new SituacaoDAO();
         UnidadeDAO daoU = new UnidadeDAO();
-        DeslocamentoDAO daoD = new DeslocamentoDAO();
-        for (Deslocamento des : deslocamentos) {
+        ViagemDAO daoD = new ViagemDAO();
+        for (Viagem vs : viagens) {
             Situacao s = new Situacao();
-            s.setSituacao(des.getSituacao().getSituacao());
+            s.setValor(vs.getSituacao().getValor());
             s = daoS.create(s);
-            des.setSituacao(s);
+            vs.setSituacao(s);
             Unidade u = new Unidade();
-            u.setUnidade(des.getUnidade().getUnidade());
+            u.setValor(vs.getUnidade().getValor());
             u = daoU.create(u);
-            des.setUnidade(u);
-            daoD.create(des);
+            vs.setUnidade(u);
+            daoD.create(vs);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
