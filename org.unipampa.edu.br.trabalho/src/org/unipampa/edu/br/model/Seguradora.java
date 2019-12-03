@@ -17,5 +17,9 @@ public class Seguradora extends Pessoa {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+    
+    public String toString(){
+        return getEndereco();
+    }
 
 }

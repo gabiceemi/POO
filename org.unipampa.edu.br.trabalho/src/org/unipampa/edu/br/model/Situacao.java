@@ -33,5 +33,9 @@ public class Situacao {
     public void setValor(String valor) {
         this.valor = valor;
     }
+    
+    public String toString(){
+        return getValor();
+    }
 
 }

@@ -67,5 +67,9 @@ public class Veiculo {
     public void setMarcaVeiculo(MarcaVeiculo marcaVeiculo) {
         this.marcaVeiculo = marcaVeiculo;
     }
+    
+    public String toString(){
+        return getPlaca();
+    }
 
 }

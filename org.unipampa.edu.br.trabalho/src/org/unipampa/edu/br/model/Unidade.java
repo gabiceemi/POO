@@ -33,5 +33,10 @@ public class Unidade {
     public void setValor(String valor) {
         this.valor = valor;
     }
+    
+    public String toString(){
+        return getValor();
+    }
+           
 
 }
