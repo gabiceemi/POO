@@ -29,6 +29,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -206,8 +207,10 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Sexo:"));
 
+        buttonGroup3.add(jRadioButton6);
         jRadioButton6.setText("Feminino");
 
+        buttonGroup3.add(jRadioButton7);
         jRadioButton7.setText("Masculino");
         jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +218,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup3.add(jRadioButton8);
         jRadioButton8.setText("Outro");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -397,6 +401,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

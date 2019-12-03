@@ -9,6 +9,6 @@ package org.unipampa.edu.br.controller;
  *
  * @author gabic
  */
-public class ViagemController {
+public class ControllerViagem {
     
 }
