@@ -5,17 +5,18 @@
  */
 package org.unipampa.edu.br.dao;
 
-import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.unipampa.edu.br.model.Viagem;
 import org.unipampa.edu.br.connection.ConnectionFactory;
+import org.unipampa.edu.br.model.MarcaVeiculo;
+import org.unipampa.edu.br.model.ModeloVeiculo;
 import org.unipampa.edu.br.model.Veiculo;
 
 /**
@@ -24,42 +25,29 @@ import org.unipampa.edu.br.model.Veiculo;
  */
 public class VeiculoDAO {
 
-    public Veiculo create(Veiculo v) {
+    public void create(Veiculo v) {
 
         Connection con = ConnectionFactory.getConnection();
+
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO veiculo (veiculo)VALUES(?)";
 
         try {
-            stmt = con.prepareStatement(sql);
+            stmt = con.prepareStatement("INSERT INTO veiculo (placa,marca,modelo)VALUES(?,?,?)");
             stmt.setString(1, v.getPlaca());
+            stmt.setInt(2, v.getMarcaVeiculo().getId());
+            stmt.setInt(3, v.getModeloVeiculo().getId());
 
             stmt.executeUpdate();
 
-            ResultSet resultSet = stmt.executeQuery("SELECT LAST_INSERT_ID()");
-            if (resultSet.next()) {
-                int novoId = resultSet.getInt("LAST_INSERT_ID()");
-                v.setId(novoId);
-            }
-            
-        
-        return v;
-    }
-    catch (SQLException ex
-
-    
-        ) {
-            JOptionPane.showMessageDialog(null, "Não foi possível salvar: " + ex);
-        return v;
-    }
-
-    
-        finally {
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
+        }
     }
-}
 
-public Veiculo select(String veiculo) {
+    public Veiculo select(String veiculo) {
         Veiculo v = new Veiculo();
         Connection con = ConnectionFactory.getConnection();
         String sql = "SELECT * veiculo WHERE veiculo = ";
@@ -80,5 +68,65 @@ public Veiculo select(String veiculo) {
         }
         return null;
 
+    }
+
+    public List<MarcaVeiculo> selectAllMarca() {
+        Connection con = ConnectionFactory.getConnection();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<MarcaVeiculo> marcas = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM marcaveiculo");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                MarcaVeiculo marca = new MarcaVeiculo();
+
+                marca.setId(rs.getInt("idMarcaVeiculo"));
+                marca.setNome(rs.getString("nome"));
+                marcas.add(marca);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return marcas;
+    }
+
+    public List<ModeloVeiculo> selectAllModelo() {
+        Connection con = ConnectionFactory.getConnection();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<ModeloVeiculo> modelos = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM modeloveiculo");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                ModeloVeiculo modelo = new ModeloVeiculo();
+
+                modelo.setId(rs.getInt("idModeloVeiculo"));
+                modelo.setNome(rs.getString("nome"));
+                modelos.add(modelo);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return modelos;
     }
 }

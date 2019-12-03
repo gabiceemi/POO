@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `pessoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pessoa` (
-  `idPessoa` int(11) NOT NULL,
+  `idPessoa` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   `tipo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idPessoa`)
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 20:16:21
+-- Dump completed on 2019-12-03 18:48:57

@@ -2,9 +2,9 @@ package org.unipampa.edu.br.model;
 
 public class MarcaVeiculo {
 
-	private int id;
+    private int id;
 
-	private String nome;
+    private String nome;
 
     /**
      * @return the id
@@ -32,6 +32,11 @@ public class MarcaVeiculo {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return getNome();
     }
 
 }

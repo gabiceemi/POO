@@ -21,7 +21,7 @@ USE `mydb` ;
 -- Table `mydb`.`MarcaVeiculo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`MarcaVeiculo` (
-  `idMarcaVeiculo` INT NOT NULL,
+  `idMarcaVeiculo` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`idMarcaVeiculo`))
 ENGINE = InnoDB;
@@ -31,7 +31,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`ModeloVeiculo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`ModeloVeiculo` (
-  `idModeloVeiculo` INT NOT NULL,
+  `idModeloVeiculo` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`idModeloVeiculo`))
 ENGINE = InnoDB;
@@ -41,7 +41,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Veiculo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Veiculo` (
-  `idVeiculo` INT NOT NULL,
+  `idVeiculo` INT NOT NULL AUTO_INCREMENT,
   `placa` VARCHAR(45) NULL,
   `marca` INT NOT NULL,
   `model` INT NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Veiculo` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Veiculo_ModeloVeiculo1`
-    FOREIGN KEY (`model`)
+    FOREIGN KEY (`modelo`)
     REFERENCES `mydb`.`ModeloVeiculo` (`idModeloVeiculo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -65,8 +65,8 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Unidade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Unidade` (
-  `idUnidade` INT NOT NULL,
-  `valor` VARCHAR(45) NULL,
+  `idUnidade` INT NOT NULL AUTO_INCREMENT,
+  `valor` VARCHAR(60) NULL,
   PRIMARY KEY (`idUnidade`))
 ENGINE = InnoDB;
 
@@ -75,7 +75,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`TipoDeslocamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`TipoDeslocamento` (
-  `idTipoDeslocamento` INT NOT NULL,
+  `idTipoDeslocamento` INT NOT NULL AUTO_INCREMENT,
   `valor` VARCHAR(45) NULL,
   PRIMARY KEY (`idTipoDeslocamento`))
 ENGINE = InnoDB;
@@ -85,7 +85,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Situacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Situacao` (
-  `idSituacao` INT NOT NULL,
+  `idSituacao` INT NOT NULL AUTO_INCREMENT,
   `valor` VARCHAR(45) NULL,
   PRIMARY KEY (`idSituacao`))
 ENGINE = InnoDB;
@@ -95,7 +95,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Pessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Pessoa` (
-  `idPessoa` INT NOT NULL,
+  `idPessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   `tipo` VARCHAR(45) NULL,
   PRIMARY KEY (`idPessoa`))
@@ -106,7 +106,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Motorista`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Motorista` (
-  `idMotorista` INT NOT NULL,
+  `idMotorista` INT NOT NULL AUTO_INCREMENT,
   `numCNH` VARCHAR(45) NULL,
   `pessoa` INT NOT NULL,
   PRIMARY KEY (`idMotorista`),
@@ -123,7 +123,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Viagem`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Viagem` (
-  `idViagem` INT NOT NULL,
+  `idViagem` INT NOT NULL AUTO_INCREMENT,
   `dataSolicitacao` VARCHAR(45) NULL,
   `qtdPassageiros` VARCHAR(45) NULL,
   `vlCustoEstadia` VARCHAR(45) NULL,
@@ -171,7 +171,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Passageiro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Passageiro` (
-  `idPassageiro` INT NOT NULL,
+  `idPassageiro` INT NOT NULL AUTO_INCREMENT,
   `sexo` VARCHAR(45) NULL,
   `pessoa` INT NOT NULL,
   PRIMARY KEY (`idPassageiro`),
@@ -188,7 +188,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Seguradora`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Seguradora` (
-  `idSeguradora` INT NOT NULL,
+  `idSeguradora` INT NOT NULL AUTO_INCREMENT,
   `endereco` VARCHAR(45) NULL,
   `pessoa` INT NOT NULL,
   PRIMARY KEY (`idSeguradora`),
@@ -205,7 +205,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`PessoaFisica`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`PessoaFisica` (
-  `idPessoaFisica` INT NOT NULL,
+  `idPessoaFisica` INT NOT NULL AUTO_INCREMENT,
   `rg` VARCHAR(45) NULL,
   `cpf` VARCHAR(45) NULL,
   `pessoa` INT NOT NULL,
@@ -223,7 +223,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`PessoaJuridica`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`PessoaJuridica` (
-  `idPessoaJuridica` INT NOT NULL,
+  `idPessoaJuridica` INT NOT NULL AUTO_INCREMENT,
   `razaoSocial` VARCHAR(45) NULL,
   `cnpj` VARCHAR(45) NULL,
   `pessoa` INT NOT NULL,
@@ -241,7 +241,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`PassageiroViagem`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`PassageiroViagem` (
-  `Passageiro_idPassageiro` INT NOT NULL,
+  `Passageiro_idPassageiro` INT NOT NULL AUTO_INCREMENT,
   `Viagem_idViagem` INT NOT NULL,
   PRIMARY KEY (`Passageiro_idPassageiro`, `Viagem_idViagem`),
   INDEX `fk_Passageiro_has_Viagem_Viagem1_idx` (`Viagem_idViagem` ASC),

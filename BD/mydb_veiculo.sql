@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `veiculo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `veiculo` (
-  `idVeiculo` int(11) NOT NULL,
+  `idVeiculo` int(11) NOT NULL AUTO_INCREMENT,
   `placa` varchar(45) DEFAULT NULL,
   `marca` int(11) NOT NULL,
   `model` int(11) NOT NULL,
@@ -41,7 +41,6 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,'IST 3331',1,1),(2,'IWE 4169',13,13),(3,'ITP 2769',4,4),(4,'IWE 1556',5,5),(5,'IQM 1820',14,14),(6,'ITW 7564',7,7);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 20:16:22
+-- Dump completed on 2019-12-03 18:48:58

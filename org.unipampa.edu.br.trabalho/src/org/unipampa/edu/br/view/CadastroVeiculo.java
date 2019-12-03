@@ -5,6 +5,11 @@
  */
 package org.unipampa.edu.br.view;
 
+import org.unipampa.edu.br.dao.VeiculoDAO;
+import org.unipampa.edu.br.model.MarcaVeiculo;
+import org.unipampa.edu.br.model.ModeloVeiculo;
+import org.unipampa.edu.br.model.Veiculo;
+
 /**
  *
  * @author gabic
@@ -16,6 +21,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
      */
     public CadastroVeiculo() {
         initComponents();
+
+        VeiculoDAO veiculo = new VeiculoDAO();
+        for (MarcaVeiculo m : veiculo.selectAllMarca()) {
+            cbMarca.addItem(m);
+        }
+
+        for (ModeloVeiculo m : veiculo.selectAllModelo()) {
+            cbModelo.addItem(m);
+        }
     }
 
     /**
@@ -31,8 +45,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbModelo = new javax.swing.JComboBox<Object>();
+        cbMarca = new javax.swing.JComboBox<Object>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -44,11 +58,18 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         jLabel3.setText("* Marca:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbModeloActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -71,8 +92,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
-                            .addComponent(jComboBox1, 0, 171, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbModelo, 0, 171, Short.MAX_VALUE)
+                            .addComponent(cbMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,11 +106,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -99,6 +120,22 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbModeloActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Veiculo veiculo = new Veiculo();
+        veiculo.setPlaca(jTextField1.getText());
+        MarcaVeiculo marca;
+        marca = (MarcaVeiculo) cbMarca.getSelectedItem();
+        veiculo.setMarcaVeiculo(marca);
+        ModeloVeiculo modelo = (ModeloVeiculo) cbModelo.getSelectedItem();
+        veiculo.setModeloVeiculo(modelo);
+        VeiculoDAO v = new VeiculoDAO();
+        v.create(veiculo);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,10 +173,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> cbMarca;
+    private javax.swing.JComboBox<Object> cbModelo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
